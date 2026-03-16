@@ -7,7 +7,7 @@ namespace App\Enum\MenuItem;
 enum CategoryEnum: string
 {
     case APPETIZER = 'appetizer';
-    case MAIN_COURSE = 'main_course';
+    case MAIN_COURSE = 'main';
     case DESSERT = 'dessert';
     case DRINK = 'drink';
 
