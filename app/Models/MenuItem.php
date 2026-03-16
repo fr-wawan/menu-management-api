@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Enum\MenuItem\CategoryEnum;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @property int $id
@@ -44,11 +45,28 @@ class MenuItem extends Model
 
     protected $casts = [
         'category' => CategoryEnum::class,
+        'price' => 'decimal:2',
         'is_available' => 'boolean',
     ];
 
     public function restaurant(): BelongsTo
     {
         return $this->belongsTo(Restaurant::class);
+    }
+
+    public function scopeByCategory(Builder $query, ?string $category): Builder
+    {
+        return $query->when(
+            $category,
+            fn(Builder $q) => $q->whereRaw('LOWER(category) = ?', [strtolower($category)])
+        );
+    }
+
+    public function scopeSearch(Builder $query, ?string $search): Builder
+    {
+        return $query->when(
+            $search,
+            fn(Builder $q) => $q->where('name', 'like', "%{$search}%")
+        );
     }
 }
