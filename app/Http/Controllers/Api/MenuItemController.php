@@ -30,7 +30,10 @@ final class MenuItemController extends Controller
             perPage: $request->integer('per_page', 15)
         );
 
-        return MenuItemResource::collection($items)->response();
+        return $this->paginate(
+            MenuItemResource::collection($items),
+            'Restaurants retrieved successfully.'
+        );
     }
 
     public function store(StoreMenuItemRequest $request, Restaurant $restaurant): JsonResponse

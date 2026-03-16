@@ -25,12 +25,15 @@ final class RestaurantController extends Controller
 
     public function index(IndexRestaurantRequest $request): JsonResponse
     {
-        return RestaurantResource::collection(
-            $this->restaurantService->paginate(
-                perPage: $request->integer('per_page', 15),
-                search: $request->query('search'),
-            )
-        )->response();
+        return $this->paginate(
+            RestaurantResource::collection(
+                $this->restaurantService->paginate(
+                    perPage: $request->integer('per_page', 15),
+                    search: $request->query('search'),
+                )
+            ),
+            'Restaurants retrieved successfully.'
+        );
     }
 
     public function store(StoreRestaurantRequest $request): JsonResponse
