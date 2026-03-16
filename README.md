@@ -5,7 +5,7 @@ A RESTful API for managing restaurants and their menu items, built with Laravel.
 ## Tech Stack
 
 - **Framework**: Laravel 12
-- **PHP**: 8.5
+- **PHP**: 8.4
 - **Database**: MySQL 8.4
 - **Authentication**: Laravel Sanctum (Token-based)
 - **Testing**: Pest PHP
@@ -36,7 +36,7 @@ docker run --rm \
     -u "$(id -u):$(id -g)" \
     -v "$(pwd):/var/www/html" \
     -w /var/www/html \
-    laravelsail/php85-composer:latest \
+    laravelsail/php84-composer:latest \
     composer install --ignore-platform-reqs
 
 # Start containers
