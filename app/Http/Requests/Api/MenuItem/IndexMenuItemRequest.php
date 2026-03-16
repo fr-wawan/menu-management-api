@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Requests\Api\Restaurant;
+namespace App\Http\Requests\Api\MenuItem;
 
+use App\Enum\MenuItem\CategoryEnum;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
-class IndexRestaurantRequest extends FormRequest
+class IndexMenuItemRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +27,16 @@ class IndexRestaurantRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'per_page' => ['sometimes', 'nullable', 'integer', 'min:1', 'max:100'],
+            'category' => ['sometimes', 'nullable', 'max:255', new Enum(CategoryEnum::class)],
             'search' => ['sometimes', 'max:255'],
+            'per_page' => ['sometimes', 'nullable', 'integer', 'min:1', 'max:100'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'category.enum' => 'The selected category is invalid. Valid categories are: ' . implode(', ', CategoryEnum::values()),
         ];
     }
 }

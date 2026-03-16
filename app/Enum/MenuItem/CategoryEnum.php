@@ -10,4 +10,9 @@ enum CategoryEnum: string
     case MAIN_COURSE = 'main_course';
     case DESSERT = 'dessert';
     case DRINK = 'drink';
+
+    public static function values(): array
+    {
+        return array_column(self::cases(), 'value');
+    }
 }
