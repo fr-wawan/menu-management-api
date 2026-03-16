@@ -239,7 +239,7 @@ Content-Type: application/json
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
-| `category` | string | — | Filter by category: `appetizer`, `main_course`, `dessert`, `drink` |
+| `category` | string | — | Filter by category: `appetizer`, `main`, `dessert`, `drink` |
 | `search` | string | — | Filter by menu item name |
 | `per_page` | integer | 15 | Items per page (max: 100) |
 
@@ -354,7 +354,7 @@ app/
 │   ├── MenuItem.php
 │   ├── Restaurant.php
 │   └── User.php
-├── Service/                          # Business logic layer
+├── Services/                          # Business logic layer
 │   ├── AuthService.php
 │   ├── MenuItemService.php
 │   └── RestaurantService.php
