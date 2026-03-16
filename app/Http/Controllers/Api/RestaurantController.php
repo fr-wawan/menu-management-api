@@ -51,7 +51,7 @@ final class RestaurantController extends Controller
         );
     }
 
-    public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
+    public function update(UpdateRestaurantRequest $request, Restaurant $restaurant): JsonResponse
     {
         return $this->success(
             new RestaurantResource($this->restaurantService->update($restaurant, $request->validated())),
