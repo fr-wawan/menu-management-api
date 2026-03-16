@@ -1,24 +1,38 @@
 # Restaurant Menu Management API
 
-A RESTful API for managing restaurants and their menu items, built with Laravel.
+![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?style=flat-square&logo=php&logoColor=white)
+![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?style=flat-square&logo=laravel&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-8.4-4479A1?style=flat-square&logo=mysql&logoColor=white)
+![Sanctum](https://img.shields.io/badge/Auth-Sanctum-FF2D20?style=flat-square&logo=laravel&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+
+A RESTful API for managing restaurants and their menu items, built with Laravel 12.
 
 ## Tech Stack
 
-- **Framework**: Laravel 12
-- **PHP**: 8.4
-- **Database**: MySQL 8.4
-- **Authentication**: Laravel Sanctum (Token-based)
-- **Testing**: Pest PHP
-- **Containerization**: Docker (Laravel Sail)
+| Layer | Technology |
+|-------|------------|
+| Framework | Laravel 12 |
+| Language | PHP 8.4 |
+| Database | MySQL 8.4 |
+| Authentication | Laravel Sanctum (Token-based) |
+| Testing | Pest PHP |
+| Containerization | Docker (Laravel Sail) |
 
 ## Requirements
 
-- Docker & Docker Compose
-- OR PHP 8.2+, Composer, MySQL
+**Using Docker (recommended):**
+- Docker >= 24.x
+- Docker Compose >= 2.x
+
+**Without Docker:**
+- PHP >= 8.4
+- Composer >= 2.x
+- MySQL >= 8.x
 
 ## Setup Instructions
 
-### Using Docker (Laravel Sail) - Recommended
+### Using Docker (Laravel Sail) — Recommended
 
 ```bash
 # Clone the repository
@@ -27,11 +41,17 @@ cd menu-management-api
 
 # Copy environment file
 cp .env.example .env
+```
 
-# Install dependencies (if you have PHP & Composer locally)
+> [!NOTE]
+> Make sure `DB_HOST=mysql`, `DB_DATABASE=laravel`, `DB_USERNAME=sail`, and `DB_PASSWORD=password`
+> are set in your `.env` — these match the default Sail configuration.
+
+```bash
+# Install dependencies (requires PHP & Composer locally)
 composer install
 
-# OR if you don't have PHP locally, use Docker:
+# OR without local PHP, use Docker:
 docker run --rm \
     -u "$(id -u):$(id -g)" \
     -v "$(pwd):/var/www/html" \
@@ -41,7 +61,13 @@ docker run --rm \
 
 # Start containers
 ./vendor/bin/sail up -d
+```
 
+> [!NOTE]
+> MySQL may take a few seconds to fully initialize after the containers start.
+> If you get a `Connection refused` error on migration, wait a moment and retry.
+
+```bash
 # Generate application key
 ./vendor/bin/sail artisan key:generate
 
@@ -57,15 +83,18 @@ docker run --rm \
 
 The API will be available at: **http://localhost:8081**
 
+---
+
 ### Local Development (Without Docker)
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/fr-wawan/menu-management-api
 cd menu-management-api
 
-# Copy environment file and configure database
+# Copy and configure environment
 cp .env.example .env
+# Edit .env: set DB_HOST, DB_DATABASE, DB_USERNAME, DB_PASSWORD to match your local MySQL
 
 # Install dependencies
 composer install
@@ -86,6 +115,8 @@ php artisan serve
 php artisan test
 ```
 
+---
+
 ## API Documentation
 
 ### Postman Collection
@@ -94,19 +125,23 @@ A complete Postman collection is included for easy API testing:
 
 1. Import `Menu Management API.postman_collection.json` into Postman
 2. Import `Menu Management API.postman_environment.json` as environment
-3. Select the "Menu Management API" environment
-4. Run "Register" or "Login" first - the token will be automatically saved
+3. Select the **"Menu Management API"** environment
+4. Run **Register** or **Login** first — the token will be automatically saved to the environment
 
 ### Base URL
+
 ```
 http://localhost:8081/api
 ```
+
+---
 
 ### Authentication
 
 The API uses token-based authentication via Laravel Sanctum.
 
 #### Register
+
 ```http
 POST /api/auth/register
 Content-Type: application/json
@@ -120,6 +155,7 @@ Content-Type: application/json
 ```
 
 #### Login
+
 ```http
 POST /api/auth/login
 Content-Type: application/json
@@ -131,6 +167,7 @@ Content-Type: application/json
 ```
 
 **Response:**
+
 ```json
 {
     "success": true,
@@ -147,26 +184,33 @@ Content-Type: application/json
 ```
 
 #### Logout (Requires Auth)
+
 ```http
 POST /api/auth/logout
 Authorization: Bearer <token>
 ```
 
+---
+
 ### Restaurants
 
 | Method | Endpoint | Auth Required | Description |
-|--------|----------|---------------|-------------|
-| GET | `/restaurants` | No | List all restaurants (paginated) |
-| GET | `/restaurants/{id}` | No | Get restaurant with menu items |
-| POST | `/restaurants` | Yes | Create a restaurant |
-| PUT | `/restaurants/{id}` | Yes | Update a restaurant |
-| DELETE | `/restaurants/{id}` | Yes | Delete a restaurant |
+|--------|----------|:---:|-------------|
+| GET | `/restaurants` | ✗ | List all restaurants (paginated) |
+| GET | `/restaurants/{id}` | ✗ | Get restaurant with menu items |
+| POST | `/restaurants` | ✓ | Create a restaurant |
+| PUT | `/restaurants/{id}` | ✓ | Update a restaurant |
+| DELETE | `/restaurants/{id}` | ✓ | Delete a restaurant |
 
-#### Query Parameters (GET /restaurants)
-- `search` - Search by restaurant name
-- `per_page` - Items per page (default: 15, max: 100)
+#### Query Parameters — `GET /restaurants`
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `search` | string | — | Filter by restaurant name |
+| `per_page` | integer | 15 | Items per page (max: 100) |
 
 #### Create Restaurant
+
 ```http
 POST /api/restaurants
 Authorization: Bearer <token>
@@ -180,21 +224,27 @@ Content-Type: application/json
 }
 ```
 
+---
+
 ### Menu Items
 
 | Method | Endpoint | Auth Required | Description |
-|--------|----------|---------------|-------------|
-| GET | `/restaurants/{id}/menu_items` | No | List menu items (paginated) |
-| POST | `/restaurants/{id}/menu_items` | Yes | Add a menu item |
-| PUT | `/menu_items/{id}` | Yes | Update a menu item |
-| DELETE | `/menu_items/{id}` | Yes | Delete a menu item |
+|--------|----------|:---:|-------------|
+| GET | `/restaurants/{id}/menu_items` | ✗ | List menu items (paginated) |
+| POST | `/restaurants/{id}/menu_items` | ✓ | Add a menu item |
+| PUT | `/menu_items/{id}` | ✓ | Update a menu item |
+| DELETE | `/menu_items/{id}` | ✓ | Delete a menu item |
 
-#### Query Parameters (GET /restaurants/{id}/menu_items)
-- `category` - Filter by category (`appetizer`, `main_course`, `dessert`, `drink`)
-- `search` - Search by menu item name
-- `per_page` - Items per page (default: 15, max: 100)
+#### Query Parameters — `GET /restaurants/{id}/menu_items`
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `category` | string | — | Filter by category: `appetizer`, `main_course`, `dessert`, `drink` |
+| `search` | string | — | Filter by menu item name |
+| `per_page` | integer | 15 | Items per page (max: 100) |
 
 #### Create Menu Item
+
 ```http
 POST /api/restaurants/1/menu_items
 Authorization: Bearer <token>
@@ -209,11 +259,14 @@ Content-Type: application/json
 }
 ```
 
+---
+
 ### Response Format
 
-All responses follow a consistent format:
+All responses follow a consistent envelope format:
 
-**Success Response:**
+**Success:**
+
 ```json
 {
     "success": true,
@@ -222,7 +275,8 @@ All responses follow a consistent format:
 }
 ```
 
-**Error Response:**
+**Error:**
+
 ```json
 {
     "success": false,
@@ -233,38 +287,40 @@ All responses follow a consistent format:
 
 ### HTTP Status Codes
 
-| Code | Description |
-|------|-------------|
-| 200 | Success |
-| 201 | Created |
-| 401 | Unauthorized |
-| 404 | Not Found |
-| 422 | Validation Error |
+| Code | Meaning |
+|------|---------|
+| 200 | OK — request succeeded |
+| 201 | Created — resource created |
+| 401 | Unauthorized — missing or invalid token |
+| 404 | Not Found — resource does not exist |
+| 422 | Unprocessable Entity — validation failed |
+
+---
 
 ## Design Decisions
 
 ### 1. Service Layer Pattern
-Business logic is encapsulated in service classes (`RestaurantService`, `MenuItemService`, `AuthService`) to keep controllers thin and improve testability. Controllers handle HTTP concerns while services handle business rules.
+Business logic is encapsulated in service classes (`RestaurantService`, `MenuItemService`, `AuthService`). Controllers handle only HTTP concerns (request/response), while services own the business rules — making each layer independently testable.
 
 ### 2. Form Request Validation
-All input validation is handled by dedicated Form Request classes, keeping validation logic separate from controllers and enabling reuse.
+All input validation lives in dedicated Form Request classes, keeping controllers clean and allowing validation rules to be reused or extended without touching controller logic.
 
 ### 3. API Resources
-Response transformation is handled by API Resource classes (`RestaurantResource`, `MenuItemResource`) to ensure consistent JSON output and decouple internal models from API responses.
+Response transformation is delegated to API Resource classes (`RestaurantResource`, `MenuItemResource`), decoupling the internal Eloquent model structure from the public API contract.
 
 ### 4. Shallow Nested Routes
-Menu item update/delete routes use shallow nesting (`/menu_items/{id}` instead of `/restaurants/{id}/menu_items/{id}`) for cleaner URLs while maintaining the nested route for creation.
+Update/delete operations use shallow nesting (`/menu_items/{id}`) instead of fully-nested paths (`/restaurants/{id}/menu_items/{id}`). Creation still uses the nested route for context — this is a standard Laravel convention that keeps URLs concise while preserving semantic clarity.
 
 ### 5. Enum for Categories
-Menu item categories use PHP 8.1+ backed enums for type safety and validation, preventing invalid category values.
+Menu item categories are backed by a PHP 8.1+ `enum`, enforcing valid values at the type level rather than relying purely on validation rules.
 
 ### 6. Authentication Strategy
-- **Public endpoints**: GET requests (list/view) are public for discoverability
-- **Protected endpoints**: Write operations (create/update/delete) require authentication
-- This reflects real-world scenarios where menus are publicly viewable but only authorized users can modify them.
+Read (GET) endpoints are public to support discoverability and unauthenticated clients (e.g., a storefront). Write operations require a Sanctum token, keeping the guard only where it matters.
 
 ### 7. Cascade Delete
-When a restaurant is deleted, all associated menu items are automatically deleted via database foreign key constraints, maintaining referential integrity.
+Deleting a restaurant automatically removes all associated menu items via database-level `ON DELETE CASCADE`, maintaining referential integrity without requiring application-layer cleanup.
+
+---
 
 ## Running Tests
 
@@ -275,35 +331,39 @@ When a restaurant is deleted, all associated menu items are automatically delete
 # Local
 php artisan test
 
-# With coverage
+# With coverage report
 ./vendor/bin/sail test --coverage
 ```
+
+---
 
 ## Project Structure
 
 ```
 app/
 ├── Enum/MenuItem/
-│   └── CategoryEnum.php          # Menu item categories
+│   └── CategoryEnum.php              # Backed enum for menu categories
 ├── Http/
 │   ├── Controllers/Api/
-│   │   ├── AuthController.php    # Authentication
+│   │   ├── AuthController.php
 │   │   ├── MenuItemController.php
 │   │   └── RestaurantController.php
-│   ├── Requests/Api/             # Form validation
-│   └── Resources/                # API response transformation
+│   ├── Requests/Api/                 # Form Request validation classes
+│   └── Resources/                   # API Resource transformers
 ├── Models/
 │   ├── MenuItem.php
 │   ├── Restaurant.php
 │   └── User.php
-├── Service/                      # Business logic layer
+├── Service/                          # Business logic layer
 │   ├── AuthService.php
 │   ├── MenuItemService.php
 │   └── RestaurantService.php
 └── Traits/
-    └── ApiResponse.php           # Consistent API responses
+    └── ApiResponse.php               # Shared response envelope helper
 ```
+
+---
 
 ## License
 
-This project is open-sourced software licensed under the MIT license.
+This project is open-sourced software licensed under the [MIT license](LICENSE).
