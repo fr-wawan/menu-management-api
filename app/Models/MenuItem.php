@@ -7,6 +7,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Enum\MenuItem\CategoryEnum;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $id
@@ -18,6 +19,7 @@ use App\Enum\MenuItem\CategoryEnum;
  * @property int $restaurant_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Restaurant $restaurant
  * @method static \Database\Factories\MenuItemFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MenuItem newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MenuItem newQuery()
@@ -44,4 +46,9 @@ class MenuItem extends Model
         'category' => CategoryEnum::class,
         'is_available' => 'boolean',
     ];
+
+    public function restaurant(): BelongsTo
+    {
+        return $this->belongsTo(Restaurant::class);
+    }
 }
