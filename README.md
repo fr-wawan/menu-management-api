@@ -44,7 +44,7 @@ cp .env.example .env
 ```
 
 > [!NOTE]
-> Make sure `DB_HOST=mysql`, `DB_DATABASE=laravel`, `DB_USERNAME=sail`, and `DB_PASSWORD=password`
+> Make sure `DB_HOST=mysql`, `DB_USERNAME=sail`, and `DB_PASSWORD=password`
 > are set in your `.env` — these match the default Sail configuration.
 
 ```bash
