@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Restaurant\IndexRestaurantRequest;
 use App\Http\Requests\Api\Restaurant\StoreRestaurantRequest;
 use App\Http\Requests\Api\Restaurant\UpdateRestaurantRequest;
+use App\Http\Resources\RestaurantDetailResource;
 use App\Http\Resources\RestaurantResource;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
@@ -45,7 +46,7 @@ final class RestaurantController extends Controller
     public function show(Restaurant $restaurant): JsonResponse
     {
         return $this->success(
-            new RestaurantResource($restaurant->load('menuItems')),
+            new RestaurantDetailResource($restaurant->load('menuItems')),
             'Restaurant retrieved successfully.'
         );
     }
