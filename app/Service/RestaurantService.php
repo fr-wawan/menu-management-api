@@ -8,9 +8,9 @@ use App\Models\Restaurant;
 
 final class RestaurantService
 {
-    public function paginate(int $perPage = 15)
+    public function paginate(int $perPage = 15, ?string $search = null)
     {
-        return Restaurant::paginate($perPage);
+        return Restaurant::search($search)->paginate($perPage);
     }
 
     /**

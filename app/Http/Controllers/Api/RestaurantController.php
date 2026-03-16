@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Restaurant\IndexRestaurantRequest;
 use App\Http\Requests\Api\Restaurant\StoreRestaurantRequest;
 use App\Http\Requests\Api\Restaurant\UpdateRestaurantRequest;
 use App\Http\Resources\RestaurantResource;
@@ -19,15 +20,17 @@ final class RestaurantController extends Controller
     use ApiResponse;
 
     public function __construct(
-        public RestaurantService $restaurantService
+        private readonly RestaurantService $restaurantService
     ) {}
 
-    public function index(): JsonResponse
+    public function index(IndexRestaurantRequest $request): JsonResponse
     {
-        return $this->success(
-            RestaurantResource::collection($this->restaurantService->paginate()),
-            'Restaurants retrieved successfully.'
-        );
+        return RestaurantResource::collection(
+            $this->restaurantService->paginate(
+                perPage: $request->integer('per_page', 15),
+                search: $request->query('search'),
+            )
+        )->response();
     }
 
     public function store(StoreRestaurantRequest $request): JsonResponse
@@ -61,7 +64,7 @@ final class RestaurantController extends Controller
 
         return $this->success(
             null,
-            'Restaurant deleted successfully.'
+            'Restaurant deleted successfully.',
         );
     }
 }
