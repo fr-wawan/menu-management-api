@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "31febdd81117587aae8f29bd1645808e",
+    "content-hash": "fe3ebdbe87fd59c66604f8ab50557c83",
     "packages": [
         {
             "name": "brick/math",
@@ -6066,6 +6066,57 @@
     ],
     "packages-dev": [
         {
+            "name": "ace-of-aces/intellipest",
+            "version": "v0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ace-of-aces/intellipest.git",
+                "reference": "daabbbe164299d6303e985acccc842146f71cff2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ace-of-aces/intellipest/zipball/daabbbe164299d6303e985acccc842146f71cff2",
+                "reference": "daabbbe164299d6303e985acccc842146f71cff2",
+                "shasum": ""
+            },
+            "require": {
+                "nikic/php-parser": "^5.7",
+                "php": "^8.3",
+                "react/event-loop": "^1.6",
+                "symfony/console": "^7.4"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.29",
+                "pestphp/pest": "^4.3",
+                "phpstan/phpstan": "^2.1"
+            },
+            "bin": [
+                "bin/intellipest"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AceOfAces\\IntelliPest\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Julian Schramm",
+                    "email": "hi@julian.center"
+                }
+            ],
+            "description": "Generate IDE helpers to assist development with PestPHP",
+            "support": {
+                "issues": "https://github.com/ace-of-aces/intellipest/issues",
+                "source": "https://github.com/ace-of-aces/intellipest/tree/v0.3.0"
+            },
+            "time": "2026-03-13T22:36:14+00:00"
+        },
+        {
             "name": "barryvdh/laravel-ide-helper",
             "version": "v3.6.1",
             "source": {
@@ -8510,6 +8561,78 @@
                 }
             ],
             "time": "2026-02-16T08:34:36+00:00"
+        },
+        {
+            "name": "react/event-loop",
+            "version": "v1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/event-loop.git",
+                "reference": "ba276bda6083df7e0050fd9b33f66ad7a4ac747a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reactphp/event-loop/zipball/ba276bda6083df7e0050fd9b33f66ad7a4ac747a",
+                "reference": "ba276bda6083df7e0050fd9b33f66ad7a4ac747a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.6 || ^5.7 || ^4.8.36"
+            },
+            "suggest": {
+                "ext-pcntl": "For signal handling support when using the StreamSelectLoop"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "React\\EventLoop\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Lück",
+                    "email": "christian@clue.engineering",
+                    "homepage": "https://clue.engineering/"
+                },
+                {
+                    "name": "Cees-Jan Kiewiet",
+                    "email": "reactphp@ceesjankiewiet.nl",
+                    "homepage": "https://wyrihaximus.net/"
+                },
+                {
+                    "name": "Jan Sorgalla",
+                    "email": "jsorgalla@gmail.com",
+                    "homepage": "https://sorgalla.com/"
+                },
+                {
+                    "name": "Chris Boden",
+                    "email": "cboden@gmail.com",
+                    "homepage": "https://cboden.dev/"
+                }
+            ],
+            "description": "ReactPHP's core reactor event loop that libraries can use for evented I/O.",
+            "keywords": [
+                "asynchronous",
+                "event-loop"
+            ],
+            "support": {
+                "issues": "https://github.com/reactphp/event-loop/issues",
+                "source": "https://github.com/reactphp/event-loop/tree/v1.6.0"
+            },
+            "funding": [
+                {
+                    "url": "https://opencollective.com/reactphp",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2025-11-17T20:46:25+00:00"
         },
         {
             "name": "sebastian/cli-parser",

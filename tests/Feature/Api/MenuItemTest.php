@@ -19,6 +19,8 @@ describe('MenuItem API', function () {
 
             $response->assertStatus(200)
                 ->assertJsonStructure([
+                    'success',
+                    'message',
                     'data' => [
                         '*' => ['id', 'name', 'description', 'price', 'category', 'is_available', 'created_at', 'updated_at'],
                     ],

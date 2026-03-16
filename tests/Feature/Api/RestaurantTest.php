@@ -16,6 +16,8 @@ describe('Restaurant API', function () {
 
             $response->assertStatus(200)
                 ->assertJsonStructure([
+                    'success',
+                    'message',
                     'data' => [
                         '*' => ['id', 'name', 'address', 'phone', 'opening_hours', 'created_at', 'updated_at'],
                     ],
