@@ -10,10 +10,9 @@ use App\Http\Requests\Api\Restaurant\StoreRestaurantRequest;
 use App\Http\Requests\Api\Restaurant\UpdateRestaurantRequest;
 use App\Http\Resources\RestaurantDetailResource;
 use App\Http\Resources\RestaurantResource;
-use App\Traits\ApiResponse;
-use Illuminate\Http\Request;
 use App\Models\Restaurant;
 use App\Service\RestaurantService;
+use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 
 final class RestaurantController extends Controller

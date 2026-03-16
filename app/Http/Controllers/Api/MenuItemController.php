@@ -14,7 +14,6 @@ use App\Models\Restaurant;
 use App\Service\MenuItemService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 final class MenuItemController extends Controller
 {

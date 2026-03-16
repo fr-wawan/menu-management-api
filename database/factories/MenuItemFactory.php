@@ -6,6 +6,7 @@ namespace Database\Factories;
 
 use App\Enum\MenuItem\CategoryEnum;
 use App\Models\MenuItem;
+use App\Models\Restaurant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,6 +22,7 @@ class MenuItemFactory extends Factory
     public function definition(): array
     {
         return [
+            'restaurant_id' => Restaurant::factory(),
             'name' => $this->faker->randomElement([
                 'Spring Rolls',
                 'Chicken Wings',
