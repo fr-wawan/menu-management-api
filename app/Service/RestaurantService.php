@@ -6,7 +6,7 @@ namespace App\Service;
 
 use App\Models\Restaurant;
 
-final class ResturantService
+final class RestaurantService
 {
     public function paginate(int $perPage = 15)
     {
