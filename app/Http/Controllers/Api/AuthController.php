@@ -7,7 +7,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Http\Requests\Api\Auth\RegisterRequest;
-use App\Models\User;
 use App\Service\AuthService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
@@ -40,8 +39,7 @@ final class AuthController extends Controller
 
     public function logout(): JsonResponse
     {
-        /** @var User $user */
-        $user = auth()->user();
+        $user = auth()->guard('sanctum')->user();
         $this->authService->logout($user);
 
         return $this->success(null, 'Logged out successfully.');
