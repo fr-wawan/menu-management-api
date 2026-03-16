@@ -22,7 +22,7 @@ A RESTful API for managing restaurants and their menu items, built with Laravel.
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/fr-wawan/menu-management-api
 cd menu-management-api
 
 # Copy environment file
