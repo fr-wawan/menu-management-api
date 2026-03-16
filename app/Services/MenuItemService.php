@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Service;
+namespace App\Services;
 
 use App\Models\MenuItem;
 use App\Models\Restaurant;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 final class MenuItemService
 {
@@ -37,7 +38,7 @@ final class MenuItemService
         ?string $category = null,
         ?string $search = null,
         int $perPage = 15,
-    ) {
+    ): LengthAwarePaginator {
         return $restaurant->menuItems()
             ->byCategory($category)
             ->search($search)

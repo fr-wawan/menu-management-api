@@ -11,7 +11,7 @@ use App\Http\Requests\Api\Restaurant\UpdateRestaurantRequest;
 use App\Http\Resources\RestaurantDetailResource;
 use App\Http\Resources\RestaurantResource;
 use App\Models\Restaurant;
-use App\Service\RestaurantService;
+use App\Services\RestaurantService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 

@@ -11,7 +11,7 @@ use App\Http\Requests\Api\MenuItem\UpdateMenuItemRequest;
 use App\Http\Resources\MenuItemResource;
 use App\Models\MenuItem;
 use App\Models\Restaurant;
-use App\Service\MenuItemService;
+use App\Services\MenuItemService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 
