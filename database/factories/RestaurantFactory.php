@@ -21,7 +21,7 @@ class RestaurantFactory extends Factory
     {
         return [
             'name' => $this->faker->randomElement(['The', 'Cafe', 'Restaurant', 'Warung'])
-                . ' ' . $this->faker->lastName(),
+                .' '.$this->faker->lastName(),
             'address' => $this->faker->address(),
             'phone' => $this->faker->numerify('+62-8##-####-####'),
             'opening_hours' => $this->faker->randomElement([

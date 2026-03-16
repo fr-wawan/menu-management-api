@@ -10,7 +10,7 @@ use App\Models\Restaurant;
 final class MenuItemService
 {
     /**
-     * @param array{name: string, description?: string|null, price: string, category?: string|null, is_available?: bool} $data
+     * @param  array{name: string, description?: string|null, price: string, category?: string|null, is_available?: bool}  $data
      */
     public function create(Restaurant $restaurant, array $data): MenuItem
     {
@@ -18,7 +18,7 @@ final class MenuItemService
     }
 
     /**
-     * @param array{name?: string, description?: string|null, price?: string, category?: string|null, is_available?: bool} $data
+     * @param  array{name?: string, description?: string|null, price?: string, category?: string|null, is_available?: bool}  $data
      */
     public function update(MenuItem $menuItem, array $data): MenuItem
     {

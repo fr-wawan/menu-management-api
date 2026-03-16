@@ -39,7 +39,7 @@ class StoreMenuItemRequest extends FormRequest
     {
         return [
             'price.decimal' => 'The price must be a valid decimal number with up to 2 decimal places.',
-            'category.enum' => 'The selected category is invalid. Valid categories are: ' . implode(', ', CategoryEnum::values()),
+            'category.enum' => 'The selected category is invalid. Valid categories are: '.implode(', ', CategoryEnum::values()),
         ];
     }
 }

@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enum\MenuItem\CategoryEnum;
+use Database\Factories\MenuItemFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Enum\MenuItem\CategoryEnum;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
@@ -18,9 +20,10 @@ use Illuminate\Database\Eloquent\Builder;
  * @property CategoryEnum|null $category
  * @property bool $is_available
  * @property int $restaurant_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Restaurant $restaurant
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Restaurant $restaurant
+ *
  * @method static Builder<static>|MenuItem byCategory(?string $category)
  * @method static \Database\Factories\MenuItemFactory factory($count = null, $state = [])
  * @method static Builder<static>|MenuItem newModelQuery()
@@ -36,11 +39,12 @@ use Illuminate\Database\Eloquent\Builder;
  * @method static Builder<static>|MenuItem wherePrice($value)
  * @method static Builder<static>|MenuItem whereRestaurantId($value)
  * @method static Builder<static>|MenuItem whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class MenuItem extends Model
 {
-    /** @use HasFactory<\Database\Factories\MenuItemFactory> */
+    /** @use HasFactory<MenuItemFactory> */
     use HasFactory;
 
     protected $guarded = ['id'];
@@ -60,7 +64,7 @@ class MenuItem extends Model
     {
         return $query->when(
             $category,
-            fn(Builder $q) => $q->whereRaw('LOWER(category) = ?', [strtolower($category)])
+            fn (Builder $q) => $q->whereRaw('LOWER(category) = ?', [strtolower($category)])
         );
     }
 
@@ -68,7 +72,7 @@ class MenuItem extends Model
     {
         return $query->when(
             $search,
-            fn(Builder $q) => $q->where('name', 'like', "%{$search}%")
+            fn (Builder $q) => $q->where('name', 'like', "%{$search}%")
         );
     }
 }

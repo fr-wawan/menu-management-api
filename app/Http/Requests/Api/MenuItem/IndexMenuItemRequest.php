@@ -36,7 +36,7 @@ class IndexMenuItemRequest extends FormRequest
     public function messages()
     {
         return [
-            'category.enum' => 'The selected category is invalid. Valid categories are: ' . implode(', ', CategoryEnum::values()),
+            'category.enum' => 'The selected category is invalid. Valid categories are: '.implode(', ', CategoryEnum::values()),
         ];
     }
 }

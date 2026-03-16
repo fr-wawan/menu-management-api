@@ -14,7 +14,7 @@ final class RestaurantService
     }
 
     /**
-     * @param array{name: string, address: string, phone?: string|null, opening_hours?: string|null} $data
+     * @param  array{name: string, address: string, phone?: string|null, opening_hours?: string|null}  $data
      */
     public function create(array $data): Restaurant
     {
@@ -22,7 +22,7 @@ final class RestaurantService
     }
 
     /**
-     * @param array{name?: string, address?: string, phone?: string|null, opening_hours?: string|null} $data
+     * @param  array{name?: string, address?: string, phone?: string|null, opening_hours?: string|null}  $data
      */
     public function update(Restaurant $restaurant, array $data): Restaurant
     {
