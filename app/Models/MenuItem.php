@@ -21,19 +21,21 @@ use Illuminate\Database\Eloquent\Builder;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Restaurant $restaurant
+ * @method static Builder<static>|MenuItem byCategory(?string $category)
  * @method static \Database\Factories\MenuItemFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MenuItem newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MenuItem newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MenuItem query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MenuItem whereCategory($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MenuItem whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MenuItem whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MenuItem whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MenuItem whereIsAvailable($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MenuItem whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MenuItem wherePrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MenuItem whereRestaurantId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|MenuItem whereUpdatedAt($value)
+ * @method static Builder<static>|MenuItem newModelQuery()
+ * @method static Builder<static>|MenuItem newQuery()
+ * @method static Builder<static>|MenuItem query()
+ * @method static Builder<static>|MenuItem search(?string $search)
+ * @method static Builder<static>|MenuItem whereCategory($value)
+ * @method static Builder<static>|MenuItem whereCreatedAt($value)
+ * @method static Builder<static>|MenuItem whereDescription($value)
+ * @method static Builder<static>|MenuItem whereId($value)
+ * @method static Builder<static>|MenuItem whereIsAvailable($value)
+ * @method static Builder<static>|MenuItem whereName($value)
+ * @method static Builder<static>|MenuItem wherePrice($value)
+ * @method static Builder<static>|MenuItem whereRestaurantId($value)
+ * @method static Builder<static>|MenuItem whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class MenuItem extends Model
